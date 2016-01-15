@@ -6,6 +6,7 @@ html, body {
     transition: all 1s;
     -webkit-font-smoothing: antialiased;
     user-select: none;
+    color: #fff;
 }
 
 #app {
@@ -19,16 +20,33 @@ html, body {
     align-items: center;
     justify-content: center;
 
-    #contents {
-        text-align: center;
-        zoom: 35%;
+    // Safari 9.0+ (iOS Only) - http://stackoverflow.com/a/25975282
+    @supports (-webkit-text-size-adjust:none) and (not (-ms-accelerator:true)) {
+        font-size: 0.4em;
 
         @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-            zoom: 70%;
+            font-size: 0.8em;
         }
 
         @media (min-width: $screen-md-min) {
-            zoom: 100%;
+            font-size: 1em;
+        }
+    }
+
+    #contents {
+        text-align: center;
+        zoom: 0.35;
+        // transform: scale(.3);
+        // transform-origin:0 0;
+
+        @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+            zoom: 0.7;
+            // transform: scale(.7);
+        }
+
+        @media (min-width: $screen-md-min) {
+            zoom: 1;
+            // transform: scale(1);
         }
 
         #time {
@@ -48,9 +66,18 @@ html, body {
                         top: -145px;
                         left: 10px;
                         font-size: .3em;
+                        opacity: 1;
 
-                        &:not(:first-of-type) {
-                            top: -85px;
+                        &.dot, &.blank {
+                            transition: all .5s;
+
+                            &:not(:first-of-type) {
+                                top: -85px;
+                            }
+                        }
+
+                        &.blank {
+                            opacity: 0;
                         }
                     }
                 }

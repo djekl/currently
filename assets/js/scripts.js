@@ -34,9 +34,11 @@ function updateTime() {
     $('#date').html(moment().format('dddd, MMMM Do YYYY'));
 
     if (parseInt(moment().format('ss'), 10) % 2) {
-        $('#time .seperator i').html('&#149;');
+        $('#time .seperator i.dot').css('opacity', 1);
+        $('#time .seperator i.blank').css('opacity', 0);
     } else {
-        $('#time .seperator i').html('&nbsp;');
+        $('#time .seperator i.dot').css('opacity', 0);
+        $('#time .seperator i.blank').css('opacity', 1);
     }
 
     setColor(hours, minutes, seconds);
