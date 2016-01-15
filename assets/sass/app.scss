@@ -21,10 +21,10 @@ html, body {
         text-align: center;
 
         #time {
-            margin-bottom: -30px;
+            margin-bottom: -20px;
 
             span {
-                font-size: 10em;
+                font-size: 15em;
 
                 &.seperator {
                     position: relative;
@@ -33,12 +33,12 @@ html, body {
 
                     i {
                         position: absolute;
-                        top: -95px;
+                        top: -155px;
                         left: 10px;
                         font-size: .3em;
 
                         &:not(:first-of-type) {
-                            top: -55px;
+                            top: -95px;
                         }
                     }
                 }
@@ -50,7 +50,7 @@ html, body {
         }
 
         div#weather {
-            margin-top: -40px;
+            margin-top: -50px;
 
             & > div {
                 display: inline-block;
@@ -59,23 +59,30 @@ html, body {
 
                 & > div > span {
                     display: block;
+
+                    &.text {
+                        font-size: 0.7em;
+                    }
                 }
             }
 
             & > div#now {
-                font-size: 4.5em;
-                margin-bottom: -30px;
+                font-size: 2.5em;
+
+                .weather-icon {
+                    font-size: 6em;
+                }
             }
 
             & > div:not(#now) {
                 position: relative;
-                top: -50px;
+                top: -35px;
             }
         }
 
         #location {
             font-size: 2em;
-            padding-top: 1em;
+            padding-top: 1.5em;
         }
     }
 }
