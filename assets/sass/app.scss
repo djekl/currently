@@ -69,7 +69,7 @@ html, body {
                         opacity: 1;
 
                         &.dot, &.blank {
-                            transition: all .5s;
+                            transition: all 1s;
 
                             &:not(:first-of-type) {
                                 top: -85px;
