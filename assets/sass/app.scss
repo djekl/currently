@@ -4,6 +4,8 @@
 html, body {
     font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', 'Open-Light', sans-serif;
     transition: all 1s;
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
 }
 
 #app {
