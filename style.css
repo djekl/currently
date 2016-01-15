@@ -1,0 +1,96 @@
+@font-face {
+    font-family: 'Weather';
+    src: url('./weather.ttf') format('truetype');
+}
+
+.weather-icon {
+    font-family: 'Weather';
+}
+
+html, body {
+    font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', 'Open-Light', sans-serif;
+
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+}
+
+#app {
+    width: 100%;
+    width: 100vw;
+
+    height: 100%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#contents {
+    text-align: center;
+}
+
+#time {
+    margin-bottom: -30px;
+}
+
+#time span {
+    font-size: 10em;
+}
+
+#time span.seperator {
+    position: relative;
+    width: 0.25em;
+    display: inline-block;
+}
+
+#time span.seperator i {
+    position: absolute;
+    top: -95px;
+    left: 10px;
+    font-size: .3em;
+}
+
+#time span.seperator i:not(:first-of-type) {
+    top: -55px;
+}
+
+#date {
+    font-size: 2em;
+}
+
+div#weather {
+    margin-top: -40px;
+}
+
+div#weather > div {
+    display: inline-block;
+    font-size: 2.5em;
+    padding: 0 20px;
+}
+
+div#weather > div#now {
+    font-size: 4.5em;
+    margin-bottom: -30px;
+}
+
+div#weather > div:not(#now) {
+    position: relative;
+    top: -50px;
+}
+
+div#weather > div > div > span {
+    display: block;
+}
+
+#location {
+    font-size: 2em;
+    padding-top: 1em;
+}
+
+.tooltip {
+    position: absolute;
+    font-size: 20px;
+}
