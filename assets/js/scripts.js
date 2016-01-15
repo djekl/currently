@@ -1,3 +1,10 @@
+// jQuery ($)
+window.$ = window.jQuery = require('jquery');
+var moment = require('moment');
+
+// unnamed requirements
+require('bootstrap-sass');
+
 $('[data-toggle="tooltip"]').tooltip();
 
 function setColor(hours, minutes, seconds) {

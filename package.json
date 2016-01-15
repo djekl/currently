@@ -1,0 +1,21 @@
+{
+  "name": "currently",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "dependencies": {
+    "bootstrap-sass": "^3.0.0",
+    "jquery": "^2.1.4",
+    "laravel-elixir": "^4.0.0",
+    "moment": "^2.11.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.8"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "DBAD"
+}
