@@ -21,6 +21,15 @@ html, body {
 
     #contents {
         text-align: center;
+        zoom: 35%;
+
+        @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+            zoom: 70%;
+        }
+
+        @media (min-width: $screen-md-min) {
+            zoom: 100%;
+        }
 
         #time {
             margin-top: -20px;
