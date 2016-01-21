@@ -47,9 +47,50 @@ function updateTime() {
 var weather_underground_api_key = 'dc203fba39f6674e';
 var _location;
 
-var getLocationFromIP = function() {
+var getLocation = function() {
     console.log('');
-    console.log('Fetching location from ip');
+    console.log('Fetching location');
+
+    console.log('Lets 1\'st try your browsers geolocation');
+
+    try {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(getLocationFromGeolocation);
+        } else {
+            console.log('Geolocation isn\'t supported by this browser');
+            getLocationFromIP();
+        }
+    } catch (error) {
+        console.log('Geolocation error was thrown');
+        geolocationError(error);
+        getLocationFromIP();
+    }
+};
+
+var geolocationError = function(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            console.log('User denied the request for Geolocation');
+            break;
+        case error.POSITION_UNAVAILABLE:
+            console.log('Location information is unavailable');
+            break;
+        case error.TIMEOUT:
+            console.log('The request to get user location timed out');
+            break;
+        case error.UNKNOWN_ERROR:
+            console.log('An unknown error occurred');
+            break;
+    }
+
+    console.log('');
+};
+
+var getLocationFromGeolocation = function(position) {
+    console.log('Fetching location from geolocation');
+
+    var lat = position.coords.latitude,
+        lng = position.coords.longitude;
 
     $.ajax({
         url: 'http://api.wunderground.com/api/' + weather_underground_api_key + '/geolookup/q/autoip.json',
@@ -63,7 +104,24 @@ var getLocationFromIP = function() {
         getNow();
         getWeather();
     });
-}
+};
+
+var getLocationFromIP = function() {
+    console.log('Fetching location from ip');
+
+    $.ajax({
+        url: 'http://api.wunderground.com/api/' + weather_underground_api_key + '/geolookup/q/' + lat + ',' + lng + '.json',
+        type: 'GET',
+        dataType: 'jsonp',
+    })
+    .done(function(data) {
+        _location = data.location;
+        $('#location').text(_location.city + ', ' + _location.country_name);
+
+        getNow();
+        getWeather();
+    });
+};
 
 var getNow = function() {
     console.log('Fetching current conditions for ' + _location.city + ', ' + _location.country_name);
@@ -86,7 +144,7 @@ var getNow = function() {
 
         $('title').html(current.temp_c + '&deg; | Currently');
     });
-}
+};
 
 var getWeather = function() {
     console.log('Fetching forecast for ' + _location.city + ', ' + _location.country_name);
@@ -109,7 +167,7 @@ var getWeather = function() {
             $(el).find('span.text').text(current.date.weekday);
         });
     });
-}
+};
 
 var conditionCode = function (icon_url) {
     var matcher = /\/(\w+).gif$/;
@@ -210,7 +268,7 @@ var conditionCode = function (icon_url) {
     }
 };
 
-getLocationFromIP();
-setInterval(getLocationFromIP, 60 * 1000);
+getLocation();
+setInterval(getLocation, 60 * 1000);
 
 setInterval(updateTime, 250);
