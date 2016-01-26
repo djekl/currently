@@ -55,7 +55,15 @@ var getLocation = function() {
 
     try {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(getLocationFromGeolocation);
+            var options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            };
+
+            navigator.geolocation.getCurrentPosition(getLocationFromGeolocation, getLocationFromIP, options);
+
+            window.setTimeout(getLocationFromIP, options.timeout);
         } else {
             console.log('Geolocation isn\'t supported by this browser');
             getLocationFromIP();
@@ -93,7 +101,7 @@ var getLocationFromGeolocation = function(position) {
         lng = position.coords.longitude;
 
     $.ajax({
-        url: 'http://api.wunderground.com/api/' + weather_underground_api_key + '/geolookup/q/autoip.json',
+        url: 'http://api.wunderground.com/api/' + weather_underground_api_key + '/geolookup/q/' + lat + ',' + lng + '.json',
         type: 'GET',
         dataType: 'jsonp',
     })
@@ -110,7 +118,7 @@ var getLocationFromIP = function() {
     console.log('Fetching location from ip');
 
     $.ajax({
-        url: 'http://api.wunderground.com/api/' + weather_underground_api_key + '/geolookup/q/' + lat + ',' + lng + '.json',
+        url: 'http://api.wunderground.com/api/' + weather_underground_api_key + '/geolookup/q/autoip.json',
         type: 'GET',
         dataType: 'jsonp',
     })
