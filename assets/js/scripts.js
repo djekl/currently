@@ -46,6 +46,7 @@ function updateTime() {
 
 var weather_underground_api_key = 'dc203fba39f6674e';
 var _location;
+var fallback;
 
 var getLocation = function() {
     console.log('');
@@ -61,9 +62,9 @@ var getLocation = function() {
                 maximumAge: 0
             };
 
+            fallback = window.setTimeout(getLocationFromIP, (options.timeout + 2000));
             navigator.geolocation.getCurrentPosition(getLocationFromGeolocation, getLocationFromIP, options);
 
-            window.setTimeout(getLocationFromIP, options.timeout);
         } else {
             console.log('Geolocation isn\'t supported by this browser');
             getLocationFromIP();
@@ -96,6 +97,8 @@ var geolocationError = function(error) {
 
 var getLocationFromGeolocation = function(position) {
     console.log('Fetching location from geolocation');
+
+    window.clearTimeout(fallback);
 
     var lat = position.coords.latitude,
         lng = position.coords.longitude;
